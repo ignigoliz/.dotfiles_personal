@@ -1,0 +1,18 @@
+[
+    {
+        "label": "Debug current file (project .venv)",
+        "adapter": "Debugpy",
+        "request": "launch",
+        "program": "$ZED_FILE",
+        "cwd": "$ZED_WORKTREE_ROOT",
+        "python": "$ZED_WORKTREE_ROOT/.venv/bin/python",
+    },
+    {
+        "label": "Debug current file (uv; sandbox)",
+        "adapter": "Debugpy",
+        "request": "launch",
+        "program": "$ZED_FILE",
+        "cwd": "$ZED_WORKTREE_ROOT",
+        "python": "~/.venvs/sandbox/bin/python",
+    },
+]

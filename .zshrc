@@ -30,12 +30,18 @@ videofps() {
   ffprobe -v error -select_streams v:0 -show_entries stream=avg_frame_rate -of csv=p=0 "$1" \
     | awk -F/ 'NF==2 && $2!=0 {printf "%.3f fps\n", $1/$2; next} {print $0}'
 }
+videoframes() {
+  if [ -z "${1:-}" ]; then echo "usage: videoframes <file>" >&2; return 1; fi
+  ffprobe -v error -select_streams v:0 -count_frames \
+    -show_entries stream=nb_read_frames -of csv=p=0 "$1"
+}
 videoinfo() {
   if [ -z "${1:-}" ]; then echo "usage: videoinfo <file>" >&2; return 1; fi
   local f="$1"
   printf "resolution: %s\n" "$(videores "$f")"
   printf "fps:        %s\n" "$(videofps "$f")"
   printf "bitrate:    %s\n" "$(bitrate "$f")"
+  printf "frames:     %s\n" "$(videoframes "$f")"
 }
 
 # ---------------------------------- Prompt -------------------------------------

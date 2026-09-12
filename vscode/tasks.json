@@ -1,0 +1,29 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "copy selection (path & lines)",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "~/.dotfiles/vscode/copy-with-location.sh"
+            ],
+            "options": {
+                "env": {
+                    "SEL_TEXT": "${selectedText}",
+                    "SEL_FILE": "${file}",
+                    "SEL_ROW": "${lineNumber}"
+                }
+            },
+            "presentation": {
+                "reveal": "never",
+                "echo": false,
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "close": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}

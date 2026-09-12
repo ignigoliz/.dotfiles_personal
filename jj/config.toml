@@ -1,0 +1,24 @@
+#:schema https://docs.jj-vcs.dev/latest/config-schema.json
+
+[user]
+name = "Iñigo Lara"
+email = "inigo@sasha.eu"
+
+[templates]
+log = '''
+separate(" ",
+  label("commit_id", "(" ++ truncate_end(50, bookmarks, "…") ++ ")"),
+  format_short_change_id(change_id) ++ if(divergent, label("divergent", "??")),
+  format_short_commit_id(commit_id),
+  if(hidden, label("hidden", "(hidden)")),
+  if(conflict, label("conflict", "conflict")),
+  if(empty, label("empty", "(empty)")),
+) ++ "\n" ++
+pad_end(40, truncate_end(60, if(description, description.first_line(), description_placeholder), "…")) ++ "\n"
+'''
+
+[ui]
+editor = "vim"
+
+[aliases]
+lg = ["log", "-n", "10"]
